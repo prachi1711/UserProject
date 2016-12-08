@@ -1,0 +1,29 @@
+body {
+	margin-left:5px;
+	font-family: helvetica, arial, sans-serif;
+	font-size: 1.2em;
+	font-weight:400; 
+}
+
+#userPost {	
+  vertical-align: top;			
+	margin:0;
+	padding: 7px;   
+  margin-bottom: 20px;  
+  border: solid 2px gray;
+  color: #6f6f6f;
+}
+#doneBtn {
+  vertical-align: top;
+	display:inline-block;
+	border-width:0px 0px 0px 1px;
+	margin:0;
+	height:35px;
+	width:80px;
+}
+
+input[type="submit"] {
+	background-color: #gainsboro;   
+  padding: 7px;
+  color: black;
+}
