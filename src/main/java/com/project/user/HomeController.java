@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.user.model.TextDAO;
 import com.project.user.property.JsonResponse;
 import com.project.user.property.Text;
 
@@ -50,7 +51,8 @@ public class HomeController {
 		JsonResponse res = new JsonResponse();
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {			
-			if(text != null && text.getUserPost()!= null && !text.getUserPost().equals("")) {    			    						        
+			if(text != null && text.getUserPost()!= null && !text.getUserPost().equals("")) {    
+				TextDAO.insert(text);
 				res.setStatus("SUCCESS");
 				res.setResult(text);				
 			} else {
