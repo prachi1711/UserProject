@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.user.property.Comment;
 import com.project.user.property.User;
 import com.project.user.property.UserText;
 import com.project.user.model.TextDAO;
+import com.project.user.model.UserTextCommentDAO;
 import com.project.user.model.UserTextDAO;
 import com.project.user.property.JsonResponse;
 import com.project.user.property.Text;
@@ -110,5 +112,48 @@ public class HomeController {
 			e1.printStackTrace();
 		}		
 		return objectMapper.writeValueAsString(res);
-	}	
+	}
+	
+	/* insert new comment for the selected post and user and return all posts and comments for that user */
+	@RequestMapping(headers ={"Accept=application/json"}, value = "/comment", method = RequestMethod.POST)	
+	public @ResponseBody String postUserComment(@RequestBody Comment comment) throws JsonGenerationException, JsonMappingException, IOException {
+		JsonResponse res = new JsonResponse();
+		UserText userTxt = new UserText();
+		ObjectMapper objectMapper = new ObjectMapper();		
+		try {	
+				if(comment != null) {  
+					comment = UserTextCommentDAO.insert(comment);	
+					userTxt = UserTextCommentDAO.select(comment.getUserName());
+					res.setStatus("SUCCESS");		
+					res.setResult(userTxt);
+				} else {
+					res.setStatus("Empty String");
+				}							
+		} catch (Exception e1) {
+			res.setStatus("ERROR");
+			e1.printStackTrace();
+		}		
+		return objectMapper.writeValueAsString(res);
+	}
+	
+	/* get all the selected user posts + comments */
+	@RequestMapping(headers ={"Accept=application/json"}, value = "/comment/{userName}", method = RequestMethod.GET)	
+	public @ResponseBody String getUserComment(@PathVariable String userName) throws JsonGenerationException, JsonMappingException, IOException {
+		JsonResponse res = new JsonResponse();
+		UserText userTxt = new UserText();
+		ObjectMapper objectMapper = new ObjectMapper();		
+		try {	
+			   if( userName != null && !userName.equalsIgnoreCase("")) {    	  					
+					userTxt = UserTextCommentDAO.select(userName);
+					res.setStatus("SUCCESS");		
+					res.setResult(userTxt);
+				} else {
+					res.setStatus("Empty String");
+				}							
+		} catch (Exception e1) {
+			res.setStatus("ERROR");
+			e1.printStackTrace();
+		}		
+		return objectMapper.writeValueAsString(res);
+	}
 }

@@ -1,5 +1,9 @@
 package com.project.user.property;
 
+import java.util.ArrayList;
+
+import com.project.user.property.Comment;
+
 
 /**
  * 
@@ -10,6 +14,7 @@ public class Text {
 			
 	public int userTxtId;
 	public String userPost;	
+	public ArrayList<Comment>  comments;
 
 	public Text() {
 
@@ -36,6 +41,14 @@ public class Text {
 	public void setUserPost(String userPost) {
 		this.userPost = userPost;
 	}	
+	
+	public ArrayList<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(ArrayList<Comment> comments) {
+		this.comments = comments;
+	}
 	
 	
 

@@ -128,6 +128,59 @@ public class HomeControllerTest {
         .when().post("/userPost/prachi").then()
         .statusCode(200);                 
     }	
+	
+	@Test
+	public void invaliUserCommentdEndpointTest() {		        
+        stubFor(post(urlEqualTo("/user/userComment"))
+                .willReturn(aResponse()
+                		.withStatus(404)));
+
+        given()
+        .contentType("application/json")        
+        .when().post("/userComment").then()          // incorrect end-point
+        .statusCode(404);                 
+    }	
+	
+	
+	@Test
+    public void saveUserCommentDataTest() {		               
+        stubFor(post(urlEqualTo("/user/comment"))
+                .willReturn(aResponse()
+                    .withHeader("Content-Type", "application/json")
+                    .withBody("{\"result\":{\"userName\":\"test\" ,\"userPost\":[{\"comments\":null, \"userTxtId\":33,\"userPost\":\"test \"}]},\"status\":\"SUCCESS\"}")));
+
+        given()
+        .contentType("application/json")
+        .body("{\"userName\": \"sanket\", \"userTxtId\": \"3\", \"comment\": \"how is test\"}")
+        .when().post("/comment").then()
+        .statusCode(200)        
+        .body(containsString("userName"))  
+        .body(containsString("userPost"));   
+    }	
+	
+	@Test
+    public void invalidGetDataEndpointTest() {		        
+        stubFor(post(urlEqualTo("/user/comment"))
+                .willReturn(aResponse()
+                		.withStatus(405)));
+
+        given()
+        .contentType("application/json")        
+        .when().post("/comment").then()          // username is missing at the end of the endpoint
+        .statusCode(405);                              //method not supported      
+    }	
+	
+	@Test
+    public void getUserCommentDataTest() {			                 
+        stubFor(post(urlEqualTo("/user/comment/prachi"))        		
+                .willReturn(aResponse()
+                		.withStatus(200)));
+
+        given()
+        .contentType("application/json")                  
+        .when().post("/comment/prachi").then()
+        .statusCode(200);                 
+    }	
 
 	    
 }

@@ -47,3 +47,30 @@ table {
     border: solid 2px gray;
     margin: 0;     
 }
+
+reply {
+	  width: 75%;
+    padding: 10px;
+    height: 60px;    
+    margin: 0; 
+}
+
+.replyBtn {
+	 width: 25%;
+    padding: 10px;
+    height: 60px;    
+    margin: 0; 
+    padding-right: 500px;
+}
+
+.commentRow {
+	 width: 95%;
+    padding: 5px;
+    height: 30px;    
+    margin: 0;     
+    padding: 20 30 20 30;
+}
+
+.hideRow {
+	display: none;
+}
