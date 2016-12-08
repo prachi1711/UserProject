@@ -8,12 +8,24 @@ package com.project.user.property;
 
 public class Text {
 			
+	public int userTxtId;
 	public String userPost;	
 
 	public Text() {
 
 	}
+	
 			
+	public int getUserTxtId() {
+		return userTxtId;
+	}
+
+
+	public void setUserTxtId(int userTxtId) {
+		this.userTxtId = userTxtId;
+	}
+
+
 	/**
 	 * @return
 	 */

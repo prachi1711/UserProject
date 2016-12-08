@@ -74,6 +74,60 @@ public class HomeControllerTest {
         .when().post("/text").then()
         .statusCode(400);                 
     }	
+	
+	
+	@Test
+	public void invaliUserPostdEndpointTest() {		        
+        stubFor(post(urlEqualTo("/user/userPosts"))
+                .willReturn(aResponse()
+                		.withStatus(404)));
+
+        given()
+        .contentType("application/json")        
+        .when().post("/userPosts").then()          // incorrect end-point
+        .statusCode(404);                 
+    }	
+	
+	
+	@Test
+    public void saveUserTextDataTest() {		               
+        stubFor(post(urlEqualTo("/user/userPost"))
+                .willReturn(aResponse()
+                    .withHeader("Content-Type", "application/json")
+                    .withBody("{\"result\":{\"userName\":\"test\" ,\"userPost\":[{\"userTxtId\":33,\"userPost\":\"test \"}]},\"status\":\"SUCCESS\"}")));
+
+        given()
+        .contentType("application/json")
+        .body("{\"userName\": \"sanket\", \"userPost\": [\"dfdfdffdgf\"]}")
+        .when().post("/userPost").then()
+        .statusCode(200)        
+        .body(containsString("userName"))  
+        .body(containsString("userPost"));   
+    }	
+	
+	@Test
+    public void invalidGetEndpointTest() {		        
+        stubFor(post(urlEqualTo("/user/userPost"))
+                .willReturn(aResponse()
+                		.withStatus(405)));
+
+        given()
+        .contentType("application/json")        
+        .when().post("/userPost").then()          // username is missing at the end of the endpoing
+        .statusCode(405);                              //method not supported      
+    }	
+	
+	@Test
+    public void getUserTextDataTest() {			                 
+        stubFor(post(urlEqualTo("/user/userPost/prachi"))        		
+                .willReturn(aResponse()
+                		.withStatus(200)));
+
+        given()
+        .contentType("application/json")                  
+        .when().post("/userPost/prachi").then()
+        .statusCode(200);                 
+    }	
 
 	    
 }

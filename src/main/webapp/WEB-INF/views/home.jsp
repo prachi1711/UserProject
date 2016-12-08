@@ -16,12 +16,20 @@
 <body>
 <h2>
 	User Project  
-</h2>  
+</h2> 
+   <div>
+ 	    Enter User Name:
+ 	    <input type="text" value="" id="userName" name="userName" placeholder="Enter user name..." />
+	</div> 
 	<div>
  	    <textarea rows="1" cols="90" name="userPost" id="userPost" placeholder="Enter text here..."> </textarea>
  	    <input type="submit" value="Done" id="doneBtn" name="doneBtn">
 	</div>
   <div> <span id="outputTxt"></span></div>  
+  <div>  
+      <table id="postTbl" name="postTbl">       
+      </table>
+  </div> 
 </body>
 </html>
 

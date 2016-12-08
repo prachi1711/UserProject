@@ -5,6 +5,14 @@ body {
 	font-weight:400; 
 }
 
+#userName {	
+	border: solid 2px gray;
+	height: 25px;
+	margin:0;
+	padding: 7px;   
+  margin-bottom: 20px;
+}
+
 #userPost {	
   vertical-align: top;			
 	margin:0;
@@ -26,4 +34,16 @@ input[type="submit"] {
 	background-color: #gainsboro;   
   padding: 7px;
   color: black;
+}
+
+table {
+	width: 95%;	
+}
+
+.comment {
+	 width: 100%;
+    padding: 10px;
+    height: 60px;
+    border: solid 2px gray;
+    margin: 0;     
 }

@@ -9,15 +9,21 @@ import com.project.user.property.Text;
 
 public class TextDAO
 {
-	public static void insert(Text text) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+	public static Text insert(Text text) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		ConnectionDAO conn= new ConnectionDAO();
+		int id;
 		String query = " insert into user_text (userText)"
                 + " values (?)";
 		// create the mysql insert preparedstatement
-		PreparedStatement preparedStmt = conn.getConnection().prepareStatement(query);
+		PreparedStatement preparedStmt = conn.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);		
 		preparedStmt.setString (1, text.getUserPost());
 		// execute the preparedstatement
 		preparedStmt.execute();
+		ResultSet rs = preparedStmt.getGeneratedKeys();
+	    rs.next();
+	    id = rs.getInt(1);
+	    text.setUserTxtId(id);
 		conn.closeConnection();
+		return text;
 	}		
 }
